@@ -56,7 +56,7 @@
 # Create api-key if not defined and SS user was not already configured
 - set_fact: archivematica_src_configure_ss_api_key={{ 999999999999999999999 | random | to_uuid | hash('md5') }}
   when: 
-    - "archivematica_src_configure_ss_api_key is undefined"
+    - archivematica_src_configure_ss_api_key == ""
     - "archivematica_src_configure_ss|bool"
 
 - name: "Create SS superuser"
