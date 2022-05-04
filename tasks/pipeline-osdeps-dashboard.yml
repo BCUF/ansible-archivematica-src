@@ -19,6 +19,16 @@
       when:
         - "dashboard.osdeps_repos"
 
+    - name: update APT Cache
+      become: yes
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+
+    - name: Wait for any possibly running unattended upgrade to finish
+      become: yes
+      raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
     - name: "Install dashboard ext. package deps."
       apt:
         pkg: "{{ dashboard.osdeps_packages | json_query('[].name') }}"
