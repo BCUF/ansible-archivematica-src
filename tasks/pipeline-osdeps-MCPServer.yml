@@ -3,6 +3,7 @@
 # ubuntu block
 - block:
     - name: "Install MCPServer ext. deps. repo keys"
+      become: yes    
       apt_key:
         id: "{{ item.id }}"
         url: "{{ item.url }}"
@@ -31,6 +32,7 @@
       raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
 
     - name: "Install MCPServer ext. package deps."
+      become: yes
       apt:
         pkg: "{{ MCPServer.osdeps_packages | json_query('[].name') }}"
         state: "latest"

@@ -2,6 +2,7 @@
 # ubuntu block
 - block:
     - name: "Install MCPClient ext. deps. repo keys"
+      become: yes
       apt_key:
         id: "{{ item.id }}"
         url: "{{ item.url }}"
@@ -30,6 +31,7 @@
       raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
 
     - name: "Install MCPClient ext. package deps."
+      become: yes
       apt:
         pkg: "{{ MCPClient.osdeps_packages | json_query('[].name') }}"
         state: "latest"
