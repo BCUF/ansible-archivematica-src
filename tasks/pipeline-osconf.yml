@@ -48,6 +48,14 @@
     group: "archivematica"
   when: "create_shareddir"
 
+- name: recursively update /tmp directory owner
+  file:
+    path: "{{ archivematica_src_shareddir }}"
+    state: directory
+    recurse: yes
+    owner: "archivematica"
+    group: "archivematica"
+
 # (this is required because some hardcoding of the shared dir remains in archivematica code)
 - name: "Symlink shared directory to default location"
   file:
