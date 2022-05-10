@@ -4,6 +4,7 @@
 archivematica_src_dir: "/opt/archivematica"
 
 # Shared directory for processing, etc
+archivematica_src_var : "/var/archivematica/"
 archivematica_src_shareddir: "/var/archivematica/sharedDirectory"
 
 # Components to install
