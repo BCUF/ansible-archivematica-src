@@ -5,7 +5,7 @@ archivematica_src_dir: "/opt/archivematica"
 
 # Shared directory for processing, etc
 archivematica_src_var : "/var/archivematica/"
-archivematica_src_shareddir: "/var/archivematica/sharedDirectory"
+archivematica_src_shareddir: "{{ archivematica_src_var }}sharedDirectory"
 
 # Components to install
 archivematica_src_install_am: "yes"
