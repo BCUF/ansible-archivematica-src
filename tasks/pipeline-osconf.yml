@@ -21,7 +21,7 @@
 
 - name: "Clear shared directory"
   file:
-    dest: "{{ archivematica_src_shareddir }}"
+    dest: "{{ archivematica_src_var }}"
     state: "absent"
   when: "archivematica_src_reset_shareddir|bool or archivematica_src_reset_am_all|bool"
 
@@ -29,7 +29,7 @@
 # check for existence before creating
 - name: "Check if shared directory exists"
   stat:
-    path: "{{ archivematica_src_shareddir }}"
+    path: "{{ archivematica_src_var }}"
   register: "shareddir_st"
 
 - set_fact:
@@ -42,7 +42,7 @@
 
 - name: "Create shared directory (if it doesn't exist and there is no symlink to it)"
   file:
-    dest: "{{ archivematica_src_shareddir }}"
+    dest: "{{ archivematica_src_var }}"
     state: "directory"
     owner: "archivematica"
     group: "archivematica"
@@ -50,7 +50,7 @@
 
 - name: recursively update /tmp directory owner
   file:
-    path: "{{ archivematica_src_shareddir }}"
+    path: "{{ archivematica_src_var }}"
     state: directory
     recurse: yes
     owner: "archivematica"
@@ -59,10 +59,10 @@
 # (this is required because some hardcoding of the shared dir remains in archivematica code)
 - name: "Symlink shared directory to default location"
   file:
-    src: "{{ archivematica_src_shareddir }}"
+    src: "{{ archivematica_src_var }}"
     dest: "/var/archivematica/sharedDirectory"
     state: "link"
-  when: "create_shareddir and archivematica_src_shareddir != '/var/archivematica/sharedDirectory'"
+  when: "create_shareddir and archivematica_src_var != '/var/archivematica/sharedDirectory'"
 
 # check if ClamAV is running with file or tcp socket
 - name: "Check if ClamAV is running with file or tcp socket"
