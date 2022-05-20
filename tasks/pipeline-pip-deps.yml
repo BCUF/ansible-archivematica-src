@@ -41,7 +41,7 @@
     name:
       - "pip=={{ archivematica_src_pip_version }}"
       - "setuptools=={{ archivematica_src_setuptools_version }}"
-      - "wheel=={{ archivematica_src_wheel_version }}"
+      #- "wheel=={{ archivematica_src_wheel_version }}"
     virtualenv: "{{ item.path }}"
     state: "present"
   with_items: "{{ virtualenvs }}"
